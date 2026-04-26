@@ -4,6 +4,8 @@
 
 本规范用于管理企业级数据字典管理系统的文档、模板、平台代码、部署脚本和后续交付物，确保多人协作、版本追溯、评审合并和发布节奏可控。
 
+PR 流向和自动阻断策略以 `Git管理模型与PR流向控制规范-v0.1.md` 为强制执行细则。
+
 ## 2. 分支模型
 
 采用轻量 Git Flow：
@@ -14,11 +16,13 @@
 | `develop` | 集成分支 | 汇总已完成但尚未发布的文档和代码 | 长期 |
 | `feature/*` | 功能分支 | 开发具体产品能力或平台模块 | 短期 |
 | `docs/*` | 文档分支 | 编写、修订和评审专项文档 | 短期 |
+| `fix/*` | 普通修复分支 | 修复尚未发布或非生产紧急问题 | 短期 |
 | `owner/*` | 产品/架构 Owner 分支 | 范围、优先级、ADR、架构约束、验收口径等 Owner 决策 | 短期 |
+| `chore/*` | 仓库维护分支 | 分支同步、CI 配置、仓库治理等非业务变更 | 短期 |
+| `integration/*` | 集成协调分支 | 多 PR 冲突处理、跨模块整合验证 | 短期 |
 | `release/*` | 发布分支 | 发布前冻结、测试、修复和打标签 | 短期 |
 | `hotfix/*` | 紧急修复分支 | 修复 `main` 上的紧急问题 | 短期 |
 | `poc/*` | 验证分支 | 技术验证、选型实验、原型验证 | 短期，可丢弃 |
-| `chore/*` | 仓库维护分支 | 分支同步、CI 配置、仓库治理等非业务变更 | 短期 |
 
 ## 3. 首批规划分支清单
 
@@ -28,6 +32,8 @@
 | `develop` | 后续集成分支 | 工程骨架、详细文档和代码先合入此分支 |
 | `docs/p0-5-design-freeze` | 编码前收口文档 | 技术决策、API DTO、数据库物理模型、导入规范、安全分级、测试用例 |
 | `owner/architecture-board` | Owner 决策工作板 | 产品范围、架构约束、ADR、验收口径和跨模块收口 |
+| `chore/sync-main-to-develop` | 当前纠偏分支 | 将已误合入 `main` 的有效文档同步回 `develop` |
+| `hotfix/git-governance-policy` | 当前治理热修复分支 | 将 PR 流向自动检查先合入 `main`，再回合 `develop` |
 | `poc/platform-stack` | 技术栈验证 | 验证 Spring Boot、Vue、PostgreSQL、OpenSearch、Flowable 的最小集成 |
 | `feature/platform-skeleton` | 平台工程骨架 | 创建前后端工程、部署脚本、基础 README |
 | `feature/backend-core` | 后端核心底座 | 用户、角色、权限、审计、元模型、资产核心 API |
@@ -44,11 +50,13 @@
 | --- | --- |
 | 功能开发 | `feature/<module-or-capability>` |
 | 文档修订 | `docs/<topic>` |
+| 普通修复 | `fix/<issue-or-topic>` |
 | Owner 决策 | `owner/<topic>` |
+| 仓库维护 | `chore/<topic>` |
+| 集成协调 | `integration/<topic>` |
 | 技术验证 | `poc/<topic>` |
 | 发布准备 | `release/v<major>.<minor>-<name>` |
 | 紧急修复 | `hotfix/<issue-or-topic>` |
-| 仓库维护 | `chore/<topic>` |
 
 命名要求：
 
@@ -58,13 +66,22 @@
 
 ## 5. 合并规则
 
-- `main` 只接受来自 `release/*`、`hotfix/*` 或经过评审的稳定变更。
-- `develop` 接受来自 `feature/*`、`docs/*`、`poc/*` 中被确认保留的变更。
+- `main` 只接受来自 `release/*`、`hotfix/*` 的 PR。
+- `develop` 接受来自 `feature/*`、`docs/*`、`fix/*`、`owner/*`、`chore/*`、`integration/*`、`poc/*` 中被确认保留的变更。
 - `feature/*` 从 `develop` 拉出，完成后合回 `develop`。
 - `docs/*` 从 `develop` 拉出，评审通过后合回 `develop`。
+- `fix/*` 从 `develop` 拉出，修复后合回 `develop`。
 - `owner/*` 从 `develop` 拉出，形成产品或架构决策后通过 PR 合回 `develop`。
+- `chore/*` 从 `develop` 拉出，完成仓库治理或分支同步后合回 `develop`。
+- `integration/*` 从 `develop` 拉出，仅用于集成协调，验证后合回 `develop`。
 - `release/*` 从 `develop` 拉出，完成测试后合入 `main` 并回合 `develop`。
 - `hotfix/*` 从 `main` 拉出，修复后合入 `main` 并回合 `develop`。
+
+### 5.1 PR Base 强制规则
+
+- `docs/*`、`feature/*`、`fix/*`、`owner/*`、`chore/*`、`poc/*`、`integration/*` 的 PR base 必须是 `develop`。
+- `release/*`、`hotfix/*` 的 PR base 可以是 `main`。
+- 禁止使用 `pull/new/<branch>` 链接创建 PR，必须使用 `compare/<base>...<branch>?expand=1` 显式指定 base。
 
 ## 6. 多 Agent 并行协作规范
 
