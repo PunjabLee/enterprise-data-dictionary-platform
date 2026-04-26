@@ -31,6 +31,7 @@ PR 流向和自动阻断策略以 `Git管理模型与PR流向控制规范-v0.1.m
 | `main` | 当前稳定基线 | 当前文档库和模板的正式基线 |
 | `develop` | 后续集成分支 | 工程骨架、详细文档和代码先合入此分支 |
 | `docs/p0-5-design-freeze` | 编码前收口文档 | 技术决策、API DTO、数据库物理模型、导入规范、安全分级、测试用例 |
+| `owner/architecture-board` | Owner 决策工作板 | 产品范围、架构约束、ADR、验收口径和跨模块收口 |
 | `chore/sync-main-to-develop` | 当前纠偏分支 | 将已误合入 `main` 的有效文档同步回 `develop` |
 | `hotfix/git-governance-policy` | 当前治理热修复分支 | 将 PR 流向自动检查先合入 `main`，再回合 `develop` |
 | `poc/platform-stack` | 技术栈验证 | 验证 Spring Boot、Vue、PostgreSQL、OpenSearch、Flowable 的最小集成 |
@@ -85,6 +86,8 @@ PR 流向和自动阻断策略以 `Git管理模型与PR流向控制规范-v0.1.m
 ## 6. 多 Agent 并行协作规范
 
 多个 agent 同时工作时，必须遵守分支隔离和写入范围隔离。禁止多个 agent 在同一个工作区、同一个分支上并行修改。
+
+详细执行机制见 `docs/06-实施交付/02-多Agent协作与PR质控机制-v0.1.md`。其中 PR Steward Agent 负责 PR 队列、质量门禁、集成顺序和冲突协调，默认不承接业务功能开发。
 
 ### 6.1 分支隔离
 
