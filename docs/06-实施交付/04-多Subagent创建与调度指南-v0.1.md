@@ -22,23 +22,35 @@ Agent 定义文件位于：
 .codex/agents
 ```
 
+这些文件是 Codex custom agent TOML 定义。每个文件至少包含：
+
+```toml
+name = "backend_metadata"
+description = "Short discoverable description."
+developer_instructions = '''
+角色职责、分支、worktree、写入范围和校验命令。
+'''
+```
+
+需要从本仓库根目录启动 Codex，或使用 `codex -C D:\codex`，项目级 agents 才会被发现。Codex TUI 中使用 `/agent` 查看或切换活动 agent 线程；`/subagent` 不是当前支持的 slash command。
+
 当前建议角色：
 
-| Agent | 定义文件 | 分支 |
-| --- | --- | --- |
-| Main Orchestrator | `.codex/agents/main-orchestrator.toml` | `develop` |
-| Product/Architecture Owner | `.codex/agents/owner-architecture.toml` | `owner/architecture-board` |
-| PR Steward | `.codex/agents/pr-steward.toml` | `integration/pr-steward` |
-| Platform Foundation | `.codex/agents/foundation.toml` | `feature/platform-skeleton` |
-| Backend System | `.codex/agents/backend-system.toml` | `feature/backend-system` |
-| Backend Metadata | `.codex/agents/backend-metadata.toml` | `feature/backend-metadata` |
-| Backend Glossary | `.codex/agents/backend-glossary.toml` | `feature/backend-glossary` |
-| Backend Lineage | `.codex/agents/backend-lineage.toml` | `feature/backend-lineage` |
-| Frontend Shell | `.codex/agents/frontend-shell.toml` | `feature/frontend-shell` |
-| Frontend Catalog | `.codex/agents/frontend-catalog.toml` | `feature/frontend-catalog` |
-| DBA | `.codex/agents/dba.toml` | `feature/database-migration` |
-| Deploy Local | `.codex/agents/deploy-local.toml` | `feature/deploy-local` |
-| QA Verification | `.codex/agents/qa-verification.toml` | `integration/qa-verification` |
+| Agent | Custom agent name | 定义文件 | 分支 |
+| --- | --- | --- | --- |
+| Main Orchestrator | `main_orchestrator` | `.codex/agents/main-orchestrator.toml` | `develop` |
+| Product/Architecture Owner | `owner_architecture` | `.codex/agents/owner-architecture.toml` | `owner/architecture-board` |
+| PR Steward | `pr_steward` | `.codex/agents/pr-steward.toml` | `integration/pr-steward` |
+| Platform Foundation | `foundation` | `.codex/agents/foundation.toml` | `feature/platform-skeleton` |
+| Backend System | `backend_system` | `.codex/agents/backend-system.toml` | `feature/backend-system` |
+| Backend Metadata | `backend_metadata` | `.codex/agents/backend-metadata.toml` | `feature/backend-metadata` |
+| Backend Glossary | `backend_glossary` | `.codex/agents/backend-glossary.toml` | `feature/backend-glossary` |
+| Backend Lineage | `backend_lineage` | `.codex/agents/backend-lineage.toml` | `feature/backend-lineage` |
+| Frontend Shell | `frontend_shell` | `.codex/agents/frontend-shell.toml` | `feature/frontend-shell` |
+| Frontend Catalog | `frontend_catalog` | `.codex/agents/frontend-catalog.toml` | `feature/frontend-catalog` |
+| DBA | `dba` | `.codex/agents/dba.toml` | `feature/database-migration` |
+| Deploy Local | `deploy_local` | `.codex/agents/deploy-local.toml` | `feature/deploy-local` |
+| QA Verification | `qa_verification` | `.codex/agents/qa-verification.toml` | `integration/qa-verification` |
 
 ## 4. 首批创建顺序
 

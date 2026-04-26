@@ -1,28 +1,46 @@
 # Agent Definitions
 
-This directory defines the main agent and subagents used for parallel product development.
+This directory contains project-level Codex custom agents for parallel product development.
+
+Codex discovers these agents when the CLI is launched from the repository root, or when started with:
+
+```powershell
+codex -C D:\codex
+```
+
+In the interactive TUI, use `/agent` to inspect or switch active agent threads. `/subagent` is not a supported slash command.
+
+Each agent TOML uses the Codex custom agent schema:
+
+```toml
+name = "backend_metadata"
+description = "Short discoverable description."
+developer_instructions = '''
+Role-specific instructions, write scope, branch, worktree, and validation commands.
+'''
+```
 
 ## Agent Types
 
-| File | Role |
-| --- | --- |
-| `main-orchestrator.toml` | Main orchestration agent |
-| `owner-architecture.toml` | Product and architecture owner |
-| `pr-steward.toml` | PR quality gate and integration steward |
-| `foundation.toml` | Platform skeleton and common engineering foundation |
-| `backend-system.toml` | Users, organizations, RBAC, audit |
-| `backend-metadata.toml` | Metadata model, assets, field dictionary |
-| `backend-glossary.toml` | Business glossary and business terms |
-| `backend-lineage.toml` | Lineage and impact analysis |
-| `frontend-shell.toml` | Frontend application shell |
-| `frontend-catalog.toml` | Catalog, assets, fields, glossary pages |
-| `deploy-local.toml` | Local deployment and sample data |
-| `qa-verification.toml` | Verification, checks, and acceptance |
-| `dba.toml` | Database model, migration, and SQL review |
+| File | Custom agent name | Role |
+| --- | --- | --- |
+| `main-orchestrator.toml` | `main_orchestrator` | Main orchestration agent |
+| `owner-architecture.toml` | `owner_architecture` | Product and architecture owner |
+| `pr-steward.toml` | `pr_steward` | PR quality gate and integration steward |
+| `foundation.toml` | `foundation` | Platform skeleton and common engineering foundation |
+| `backend-system.toml` | `backend_system` | Users, organizations, RBAC, audit |
+| `backend-metadata.toml` | `backend_metadata` | Metadata model, assets, field dictionary |
+| `backend-glossary.toml` | `backend_glossary` | Business glossary and business terms |
+| `backend-lineage.toml` | `backend_lineage` | Lineage and impact analysis |
+| `frontend-shell.toml` | `frontend_shell` | Frontend application shell |
+| `frontend-catalog.toml` | `frontend_catalog` | Catalog, assets, fields, glossary pages |
+| `deploy-local.toml` | `deploy_local` | Local deployment and sample data |
+| `qa-verification.toml` | `qa_verification` | Verification, checks, and acceptance |
+| `dba.toml` | `dba` | Database model, migration, and SQL review |
 
 ## Creation Rule
 
-Create one worktree per agent:
+Create one worktree per implementation agent:
 
 ```powershell
 git switch develop

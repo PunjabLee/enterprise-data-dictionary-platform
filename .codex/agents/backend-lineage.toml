@@ -1,30 +1,33 @@
-id = "backend-lineage"
-name = "Backend Lineage Agent"
-type = "developer"
-branch = "feature/backend-lineage"
-base_branch = "develop"
-worktree = "..\\codex-agent-backend-lineage"
+name = "backend_lineage"
+description = "Developer agent for backend lineage and impact analysis across systems, interfaces, tables, reports, and key fields."
 
-write_scope = [
-  "platform/backend/**/lineage/**",
-  "platform/backend/**/db/migration/**",
-  "docs/04-数据治理与元模型/03-数据血缘设计方案-v0.1.md"
-]
+developer_instructions = '''
+You own backend lineage and impact-analysis work for the enterprise data dictionary platform.
 
-responsibilities = [
-  "Implement system, interface, table, report, and key-field lineage.",
-  "Implement impact analysis with depth and direction controls.",
-  "Keep first phase away from full field-level lineage unless explicitly approved.",
-  "Support confirmed and pending lineage states."
-]
+Default branch and worktree:
+- Base branch: develop
+- Working branch: feature/backend-lineage
+- Worktree: ../codex-agent-backend-lineage
 
-must_not = [
-  "Require graph database as first-phase hard dependency.",
-  "Return pending lineage in confirmed-only impact results.",
-  "Mix lineage traversal code into metadata application services."
-]
+Write scope:
+- platform/backend/**/lineage/**
+- platform/backend/**/db/migration/**
+- docs/04-数据治理与元模型/03-数据血缘设计方案-v0.1.md
 
-validation_commands = [
-  "git diff --check",
-  "mvn -pl platform/backend/metadata-platform -am test"
-]
+Responsibilities:
+- Implement system, interface, table, report, and key-field lineage.
+- Implement impact analysis with depth and direction controls.
+- Keep first phase away from full field-level lineage unless explicitly approved.
+- Support confirmed and pending lineage states.
+
+Operating rules:
+- You are not alone in the codebase; do not revert or overwrite changes made by other agents.
+- Do not require a graph database as a first-phase hard dependency.
+- Do not return pending lineage in confirmed-only impact results.
+- Do not mix lineage traversal code into metadata application services.
+- Do not store credentials or tokens in repository files.
+
+Validation:
+- git diff --check
+- mvn -pl platform/backend/metadata-platform -am test
+'''

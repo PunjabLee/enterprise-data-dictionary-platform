@@ -4,7 +4,7 @@ This directory stores project-level agent definitions, workflows, prompts, rules
 
 Tracked directories:
 
-- `agents/`: Main agent and subagent role definitions.
+- `agents/`: Codex custom agent definitions for main and subagent roles.
 - `workflows/`: Repeatable multi-agent execution workflows.
 - `prompts/`: Shared prompt templates.
 - `rules/`: Project-specific rules and guardrails.
@@ -13,6 +13,8 @@ Tracked directories:
 Rules:
 
 - Agent definitions are versioned with the repository.
+- Codex discovers these project-level custom agents when launched from this repository root, or with `codex -C D:\codex`.
+- Use `/agent` in the Codex TUI to inspect or switch active agent threads; `/subagent` is not a supported slash command.
 - Secrets, tokens, credentials, and personal runtime state must not be stored here.
 - Every implementation subagent must use an isolated branch and worktree.
 - PRs from `docs/*`, `feature/*`, `fix/*`, `owner/*`, `chore/*`, `poc/*`, and `integration/*` must target `develop`.

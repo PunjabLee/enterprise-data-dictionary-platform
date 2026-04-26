@@ -167,21 +167,23 @@ Project-level agent definitions are stored in:
 .codex/agents
 ```
 
+These files are Codex custom agent TOML definitions. Start Codex from this repository root, or use `codex -C D:\codex`, so project-level agents are discovered. In the Codex TUI, use `/agent` to inspect or switch active agent threads; `/subagent` is not a supported slash command.
+
 Primary agents:
 
-- Main Orchestrator
-- Product/Architecture Owner
-- PR Steward
-- Platform Foundation
-- Backend System
-- Backend Metadata
-- Backend Glossary
-- Backend Lineage
-- Frontend Shell
-- Frontend Catalog
-- DBA
-- Deploy Local
-- QA Verification
+- `main_orchestrator`
+- `owner_architecture`
+- `pr_steward`
+- `foundation`
+- `backend_system`
+- `backend_metadata`
+- `backend_glossary`
+- `backend_lineage`
+- `frontend_shell`
+- `frontend_catalog`
+- `dba`
+- `deploy_local`
+- `qa_verification`
 
 Core rule:
 

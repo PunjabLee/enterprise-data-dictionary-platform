@@ -81,23 +81,25 @@ Methodology alignment:
 
 ## Multi-Agent Model
 
-Project-level agent definitions live in `.codex/agents`.
+Project-level Codex custom agent definitions live in `.codex/agents`.
+
+Codex discovers these agents when launched from `D:\codex`, or with `codex -C D:\codex`. Use `/agent` in the TUI to inspect or switch active agent threads; `/subagent` is not a supported slash command.
 
 Primary agents:
 
-- Main Orchestrator.
-- Product/Architecture Owner.
-- PR Steward.
-- Platform Foundation.
-- Backend System.
-- Backend Metadata.
-- Backend Glossary.
-- Backend Lineage.
-- Frontend Shell.
-- Frontend Catalog.
-- DBA.
-- Deploy Local.
-- QA Verification.
+- `main_orchestrator`.
+- `owner_architecture`.
+- `pr_steward`.
+- `foundation`.
+- `backend_system`.
+- `backend_metadata`.
+- `backend_glossary`.
+- `backend_lineage`.
+- `frontend_shell`.
+- `frontend_catalog`.
+- `dba`.
+- `deploy_local`.
+- `qa_verification`.
 
 Execution rule:
 

@@ -26,6 +26,8 @@ git worktree add ..\codex-agent-deploy-local -b feature/deploy-local develop
 
 ## 3. Handoff Template
 
+Custom agent definitions live in `.codex/agents`. Start Codex from the repository root, or use `codex -C D:\codex`, so the project-level agents are discovered.
+
 Every subagent receives:
 
 - Goal.

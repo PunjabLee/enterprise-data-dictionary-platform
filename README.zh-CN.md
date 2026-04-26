@@ -163,21 +163,23 @@ develop <- 接收 docs/*、feature/*、fix/*、chore/*、owner/*、poc/*、integ
 .codex/agents
 ```
 
+这些文件是 Codex custom agent TOML 定义。需要从本仓库根目录启动 Codex，或使用 `codex -C D:\codex`，项目级 agents 才会被发现。在 Codex TUI 中使用 `/agent` 查看或切换活动 agent 线程；`/subagent` 不是当前支持的 slash command。
+
 当前定义：
 
-- Main Orchestrator
-- Product/Architecture Owner
-- PR Steward
-- Platform Foundation
-- Backend System
-- Backend Metadata
-- Backend Glossary
-- Backend Lineage
-- Frontend Shell
-- Frontend Catalog
-- DBA
-- Deploy Local
-- QA Verification
+- `main_orchestrator`
+- `owner_architecture`
+- `pr_steward`
+- `foundation`
+- `backend_system`
+- `backend_metadata`
+- `backend_glossary`
+- `backend_lineage`
+- `frontend_shell`
+- `frontend_catalog`
+- `dba`
+- `deploy_local`
+- `qa_verification`
 
 核心规则：
 
