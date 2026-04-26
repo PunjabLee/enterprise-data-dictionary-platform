@@ -69,6 +69,7 @@
 | 文档修订 | `docs/agent-pr-governance` |
 | 技术验证 | `poc/opensearch-search` |
 | 缺陷修复 | `fix/import-validation` |
+| 仓库维护 | `chore/sync-main-to-develop` |
 
 推荐 worktree 命令：
 
