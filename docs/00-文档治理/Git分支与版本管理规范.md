@@ -60,7 +60,183 @@
 - `release/*` 从 `develop` 拉出，完成测试后合入 `main` 并回合 `develop`。
 - `hotfix/*` 从 `main` 拉出，修复后合入 `main` 并回合 `develop`。
 
-## 6. 提交信息规范
+## 6. 多 Agent 并行协作规范
+
+多个 agent 同时工作时，必须遵守分支隔离和写入范围隔离。禁止多个 agent 在同一个工作区、同一个分支上并行修改。
+
+### 6.1 分支隔离
+
+每个 agent 使用独立分支：
+
+| 场景 | 分支示例 |
+| --- | --- |
+| 文档收口 | `docs/p0-5-design-freeze/agent-api-dto` |
+| 后端元模型 | `feature/backend-core/agent-metadata` |
+| 后端权限 | `feature/backend-core/agent-auth` |
+| 前端资产目录 | `feature/frontend-console/agent-catalog` |
+| Excel 导入 | `feature/import-export/agent-import` |
+| 血缘分析 | `feature/lineage-impact/agent-graph` |
+
+如果任务足够独立，也可以直接使用一级任务分支，例如 `feature/import-export`；但同一分支同一时间只能有一个 agent 写入。
+
+### 6.2 Worktree 隔离
+
+推荐每个 agent 使用独立 worktree，避免相互覆盖工作区文件：
+
+```powershell
+git switch develop
+git pull --ff-only
+git worktree add ..\codex-agent-api-dto -b docs/p0-5-design-freeze/agent-api-dto develop
+git worktree add ..\codex-agent-backend-auth -b feature/backend-core/agent-auth develop
+```
+
+常用查看和清理命令：
+
+```powershell
+git worktree list
+git worktree remove ..\codex-agent-api-dto
+git branch -d docs/p0-5-design-freeze/agent-api-dto
+```
+
+### 6.3 写入范围声明
+
+每个 agent 开始前必须声明写入范围，PR 描述中也必须写明。
+
+示例：
+
+| Agent | 分支 | 写入范围 |
+| --- | --- | --- |
+| Agent A | `docs/p0-5-design-freeze/agent-api-dto` | `docs/05-接口与集成` |
+| Agent B | `docs/p0-5-design-freeze/agent-db` | `docs/03-架构设计` |
+| Agent C | `feature/frontend-console/agent-catalog` | `platform/frontend/web-console/src/pages/catalog` |
+| Agent D | `feature/backend-core/agent-auth` | `platform/backend/.../system` |
+
+规则：
+
+- 不改其他 agent 的写入范围。
+- 不做顺手格式化全仓库。
+- 不移动对方正在编辑的文件。
+- 必须避免同一文件多人并行修改；确需并行时，先拆文件或明确合并责任人。
+
+### 6.4 同步规则
+
+每个 agent 开始和提交前执行：
+
+```powershell
+git fetch origin
+git rebase origin/develop
+```
+
+如果还没有远程仓库，使用本地 `develop`：
+
+```powershell
+git fetch --all
+git rebase develop
+```
+
+冲突处理原则：
+
+- 谁的分支后合并，谁负责解决冲突。
+- 冲突涉及业务决策时，不允许 agent 自行猜测，应记录到 PR 评论或决策记录。
+- 解决冲突后必须重新运行对应检查。
+
+### 6.5 多 Agent 合并顺序
+
+同一批次建议按依赖顺序合并：
+
+1. 文档与技术决策。
+2. 数据库迁移和通用类型。
+3. 后端核心 API。
+4. 前端页面和服务调用。
+5. 集成、部署、测试。
+
+禁止先合并依赖下游代码，再补基础模型或接口规范。
+
+## 7. GitHub CLI 与 PR 规范
+
+当前本机如需使用 GitHub CLI，应先安装并登录：
+
+```powershell
+winget install GitHub.cli
+gh auth login
+```
+
+如果还没有远程仓库：
+
+```powershell
+gh repo create <org-or-user>/<repo-name> --private --source=. --remote=origin --push
+git push origin develop
+git push origin --tags
+```
+
+### 7.1 创建 PR
+
+常用命令：
+
+```powershell
+git push -u origin <branch>
+gh pr create --base develop --head <branch> --title "<type>: <summary>" --body-file .github/pull_request_template.md
+```
+
+示例：
+
+```powershell
+gh pr create --base develop --head docs/p0-5-design-freeze/agent-api-dto --title "docs: add detailed API DTO specification"
+```
+
+### 7.2 PR 检查
+
+```powershell
+gh pr status
+gh pr view <number>
+gh pr checks <number>
+gh pr diff <number>
+```
+
+评审关注点：
+
+- 是否只改声明的写入范围。
+- 是否更新相关文档清单。
+- 是否包含测试或验收说明。
+- 是否存在未说明的技术决策。
+- 是否引入安全、权限、审计或数据泄露风险。
+
+### 7.3 PR 合并策略
+
+默认使用 squash merge：
+
+```powershell
+gh pr merge <number> --squash --delete-branch
+```
+
+使用规则：
+
+- `feature/*`、`docs/*` 默认 squash 合并到 `develop`。
+- `release/*` 合并到 `main` 时可使用 merge commit，保留发布上下文。
+- `hotfix/*` 合并到 `main` 后必须同步回 `develop`。
+- 禁止未评审直接合并到 `main`。
+
+### 7.4 PR 标题规范
+
+PR 标题与提交信息保持一致：
+
+- `docs: add design freeze documents`
+- `feat: add metadata asset API`
+- `fix: correct lineage impact traversal`
+- `security: restrict sensitive field export`
+
+### 7.5 PR 描述必须包含
+
+- 变更范围。
+- 写入范围。
+- 关联文档或 issue。
+- 测试结果。
+- 风险与回滚方式。
+- 是否影响数据库、权限、API、部署。
+
+PR 模板存放在 `.github/pull_request_template.md`。
+
+## 8. 提交信息规范
 
 提交信息采用：
 
@@ -85,7 +261,7 @@
 - `feat: add metadata asset API`
 - `security: add sensitive field access audit`
 
-## 7. 标签与版本
+## 9. 标签与版本
 
 | 标签 | 含义 |
 | --- | --- |
@@ -96,7 +272,7 @@
 
 发布标签只打在 `main` 分支。
 
-## 8. 当前建议
+## 10. 当前建议
 
 当前仓库初始化后：
 
@@ -104,4 +280,3 @@
 2. 创建 `develop` 作为后续集成分支。
 3. 下一步从 `develop` 拉出 `docs/p0-5-design-freeze`，补齐编码前收口文档。
 4. 收口文档评审通过后，再从 `develop` 拉出 `feature/platform-skeleton` 创建工程骨架。
-
