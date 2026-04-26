@@ -1,0 +1,56 @@
+name: Branch Policy
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - edited
+      - ready_for_review
+    branches:
+      - main
+      - develop
+
+permissions:
+  contents: read
+
+jobs:
+  validate-branch-flow:
+    name: Validate PR target branch
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check base/head branch policy
+        env:
+          BASE_BRANCH: ${{ github.base_ref }}
+          HEAD_BRANCH: ${{ github.head_ref }}
+        run: |
+          set -euo pipefail
+
+          echo "Base branch: ${BASE_BRANCH}"
+          echo "Head branch: ${HEAD_BRANCH}"
+
+          fail() {
+            echo "::error::$1"
+            exit 1
+          }
+
+          if [[ "${BASE_BRANCH}" == "main" ]]; then
+            if [[ "${HEAD_BRANCH}" =~ ^(release|hotfix)/ ]]; then
+              echo "Allowed: release/hotfix PR into main."
+              exit 0
+            fi
+
+            fail "Only release/* or hotfix/* branches may target main. Use develop as the base for docs/*, feature/*, fix/*, chore/*, owner/*, poc/* and integration/*."
+          fi
+
+          if [[ "${BASE_BRANCH}" == "develop" ]]; then
+            if [[ "${HEAD_BRANCH}" =~ ^(docs|feature|fix|chore|owner|poc|integration|release|hotfix)/ ]]; then
+              echo "Allowed: delivery branch PR into develop."
+              exit 0
+            fi
+
+            fail "Only docs/*, feature/*, fix/*, chore/*, owner/*, poc/*, integration/*, release/* or hotfix/* branches may target develop."
+          fi
+
+          fail "Unsupported base branch: ${BASE_BRANCH}. PRs should target develop first, then main only through release/* or hotfix/*."
