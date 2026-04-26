@@ -1,0 +1,47 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+*~
+
+# Office temporary lock files
+~$*.docx
+~$*.xlsx
+~$*.pptx
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+*.local
+*.secret
+
+# Logs and runtime output
+logs/
+*.log
+*.pid
+
+# Node / frontend
+node_modules/
+dist/
+build/
+.vite/
+.next/
+coverage/
+
+# Java / backend
+target/
+.gradle/
+out/
+*.class
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Temporary/generated duplicate workspace artifacts
+/templates/
+
