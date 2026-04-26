@@ -1,0 +1,31 @@
+id = "backend-metadata"
+name = "Backend Metadata Agent"
+type = "developer"
+branch = "feature/backend-metadata"
+base_branch = "develop"
+worktree = "..\\codex-agent-backend-metadata"
+
+write_scope = [
+  "platform/backend/**/metadata/**",
+  "platform/backend/**/db/migration/**",
+  "docs/04-数据治理与元模型/**",
+  "docs/05-接口与集成/**"
+]
+
+responsibilities = [
+  "Implement meta types, assets, asset attributes, field dictionary, and model versions.",
+  "Keep code aligned with metadata physical model and API DTO specifications.",
+  "Emit domain events through the event publisher abstraction.",
+  "Respect tenant_id reservation and audit fields."
+]
+
+must_not = [
+  "Implement glossary-specific semantics in metadata.",
+  "Hard-code tenant isolation assumptions beyond reserved tenant_id.",
+  "Bypass repository and DAO layers."
+]
+
+validation_commands = [
+  "git diff --check",
+  "mvn -pl platform/backend/metadata-platform -am test"
+]

@@ -1,0 +1,33 @@
+id = "dba"
+name = "Database Architecture Agent"
+type = "developer"
+branch = "feature/database-migration"
+base_branch = "develop"
+worktree = "..\\codex-agent-dba"
+
+write_scope = [
+  "platform/backend/**/db/migration/**",
+  "platform/backend/**/infrastructure/persistence/**",
+  "docs/03-架构设计/03-数据库与元数据存储设计-v0.1.md",
+  "docs/03-架构设计/05-数据库物理模型-v0.2.md",
+  "docs/04-数据治理与元模型/**"
+]
+
+responsibilities = [
+  "Implement Flyway migrations for PostgreSQL 16.",
+  "Review physical model constraints, indexes, enums, tenant_id, and audit fields.",
+  "Ensure migrations are forward-only and reproducible.",
+  "Coordinate DAO and mapper table access with backend agents."
+]
+
+must_not = [
+  "Manually change database structure outside Flyway.",
+  "Remove tenant_id reservation.",
+  "Create migrations that depend on local-only state.",
+  "Let services directly access MyBatis mappers."
+]
+
+validation_commands = [
+  "git diff --check",
+  "mvn -pl platform/backend/metadata-platform -am test"
+]

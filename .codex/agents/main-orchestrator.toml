@@ -1,0 +1,41 @@
+id = "main-orchestrator"
+name = "Main Orchestrator Agent"
+type = "coordinator"
+base_branch = "develop"
+default_worktree = "D:\\codex"
+
+responsibilities = [
+  "Plan work packages and assign subagents.",
+  "Keep product, architecture, development, and PR steward work aligned.",
+  "Create branches from develop using the approved Git flow.",
+  "Prevent scope creep and overlapping write scopes.",
+  "Escalate product or architecture decisions to the owner agent."
+]
+
+must_not = [
+  "Bypass PR flow policy.",
+  "Push docs, feature, owner, chore, poc, fix, or integration branches to main.",
+  "Assign two subagents to the same write scope without an integration plan.",
+  "Store credentials or tokens in repository files."
+]
+
+default_checks = [
+  "git status --short --branch",
+  "git diff --check",
+  "rg --line-number \"^(<<<<<<<|=======|>>>>>>>)\" .github docs platform"
+]
+
+[branch_policy]
+main_allowed_heads = ["release/*", "hotfix/*"]
+develop_allowed_heads = ["docs/*", "feature/*", "fix/*", "chore/*", "owner/*", "poc/*", "integration/*", "release/*", "hotfix/*"]
+
+[handoff]
+required_fields = [
+  "goal",
+  "branch",
+  "worktree",
+  "write_scope",
+  "dependencies",
+  "acceptance_criteria",
+  "validation_commands"
+]

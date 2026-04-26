@@ -1,0 +1,38 @@
+id = "pr-steward"
+name = "PR Steward Agent"
+type = "reviewer"
+branch = "integration/pr-steward"
+base_branch = "develop"
+worktree = "..\\codex-agent-pr-steward"
+
+write_scope = [
+  ".github/**",
+  "docs/00-文档治理/**",
+  "docs/06-实施交付/**"
+]
+
+responsibilities = [
+  "Check PR base and head branch policy before content review.",
+  "Validate write scope, architecture constraints, tests, and documentation updates.",
+  "Sequence dependent PRs and coordinate conflict resolution.",
+  "Merge only clean PRs with passing required checks.",
+  "Reject docs, feature, owner, chore, fix, poc, and integration PRs targeting main."
+]
+
+must_not = [
+  "Rewrite feature implementation for development agents.",
+  "Change product scope or architecture direction without owner approval.",
+  "Merge dirty, incorrectly based, or unvalidated PRs.",
+  "Bypass branch policy checks."
+]
+
+validation_commands = [
+  "git diff --check",
+  "rg --line-number \"^(<<<<<<<|=======|>>>>>>>)\" .github docs platform",
+  "git status --short --branch"
+]
+
+[merge_policy]
+default_method = "squash"
+default_base = "develop"
+main_allowed_heads = ["release/*", "hotfix/*"]

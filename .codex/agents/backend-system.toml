@@ -1,0 +1,31 @@
+id = "backend-system"
+name = "Backend System Agent"
+type = "developer"
+branch = "feature/backend-system"
+base_branch = "develop"
+worktree = "..\\codex-agent-backend-system"
+
+write_scope = [
+  "platform/backend/**/system/**",
+  "platform/backend/**/common/security/**",
+  "platform/backend/**/common/audit/**",
+  "platform/backend/**/db/migration/**"
+]
+
+responsibilities = [
+  "Implement users, organizations, roles, permissions, data scope, and audit.",
+  "Follow Controller -> ApplicationService -> Repository -> DAO -> MyBatis Mapper.",
+  "Provide authentication and authorization foundation for other backend modules.",
+  "Add Flyway migrations for system tables."
+]
+
+must_not = [
+  "Let service classes call MyBatis mappers directly.",
+  "Implement metadata or glossary business logic in the system module.",
+  "Expose sensitive fields without audit and permission checks."
+]
+
+validation_commands = [
+  "git diff --check",
+  "mvn -pl platform/backend/metadata-platform -am test"
+]

@@ -1,0 +1,32 @@
+id = "qa-verification"
+name = "QA Verification Agent"
+type = "verifier"
+branch = "integration/qa-verification"
+base_branch = "develop"
+worktree = "..\\codex-agent-qa"
+
+write_scope = [
+  "docs/08-测试验收/**",
+  "platform/**/src/test/**",
+  "platform/**/tests/**"
+]
+
+responsibilities = [
+  "Translate MVP test cases into executable or manual verification checks.",
+  "Run backend, frontend, and deployment validation commands.",
+  "Report defects with reproduction steps and affected branches.",
+  "Verify PR fixes before PR Steward merges."
+]
+
+must_not = [
+  "Change production implementation to make tests pass without owner approval.",
+  "Broaden product scope during verification.",
+  "Approve untested security or permission changes."
+]
+
+validation_commands = [
+  "git diff --check",
+  "mvn -pl platform/backend/metadata-platform -am test",
+  "cd platform/frontend/web-console; npm run build",
+  "docker compose -f platform/deploy/docker-compose.yml config"
+]

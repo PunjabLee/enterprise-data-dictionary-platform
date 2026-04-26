@@ -1,0 +1,34 @@
+id = "frontend-shell"
+name = "Frontend Shell Agent"
+type = "developer"
+branch = "feature/frontend-shell"
+base_branch = "develop"
+worktree = "..\\codex-agent-frontend-shell"
+
+write_scope = [
+  "platform/frontend/web-console/src/layouts/**",
+  "platform/frontend/web-console/src/router/**",
+  "platform/frontend/web-console/src/stores/**",
+  "platform/frontend/web-console/src/services/**",
+  "platform/frontend/web-console/src/theme/**"
+]
+
+responsibilities = [
+  "Implement Vue 3 application shell, routing, menus, auth guards, and shared API client.",
+  "Use Ant Design Vue according to the ADR decision.",
+  "Keep frontend module boundaries aligned with product navigation.",
+  "Provide stable layout and shared components for feature pages."
+]
+
+must_not = [
+  "Replace Ant Design Vue with another UI library.",
+  "Implement deep business pages before shell contracts are stable.",
+  "Hard-code backend URLs outside environment configuration."
+]
+
+validation_commands = [
+  "git diff --check",
+  "cd platform/frontend/web-console; npm run lint",
+  "cd platform/frontend/web-console; npm run type-check",
+  "cd platform/frontend/web-console; npm run build"
+]

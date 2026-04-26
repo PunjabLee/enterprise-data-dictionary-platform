@@ -1,0 +1,30 @@
+id = "backend-lineage"
+name = "Backend Lineage Agent"
+type = "developer"
+branch = "feature/backend-lineage"
+base_branch = "develop"
+worktree = "..\\codex-agent-backend-lineage"
+
+write_scope = [
+  "platform/backend/**/lineage/**",
+  "platform/backend/**/db/migration/**",
+  "docs/04-数据治理与元模型/03-数据血缘设计方案-v0.1.md"
+]
+
+responsibilities = [
+  "Implement system, interface, table, report, and key-field lineage.",
+  "Implement impact analysis with depth and direction controls.",
+  "Keep first phase away from full field-level lineage unless explicitly approved.",
+  "Support confirmed and pending lineage states."
+]
+
+must_not = [
+  "Require graph database as first-phase hard dependency.",
+  "Return pending lineage in confirmed-only impact results.",
+  "Mix lineage traversal code into metadata application services."
+]
+
+validation_commands = [
+  "git diff --check",
+  "mvn -pl platform/backend/metadata-platform -am test"
+]

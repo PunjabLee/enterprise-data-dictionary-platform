@@ -1,0 +1,31 @@
+id = "backend-glossary"
+name = "Backend Business Glossary Agent"
+type = "developer"
+branch = "feature/backend-glossary"
+base_branch = "develop"
+worktree = "..\\codex-agent-backend-glossary"
+
+write_scope = [
+  "platform/backend/**/glossary/**",
+  "platform/backend/**/db/migration/**",
+  "docs/04-数据治理与元模型/08-业务术语管理设计-v0.1.md",
+  "docs/04-数据治理与元模型/09-业务术语元模型补充-v0.1.md"
+]
+
+responsibilities = [
+  "Implement BusinessTerm, term relations, term references, conflict detection, and approval hooks.",
+  "Keep Business Glossary separate from data standards.",
+  "Expose glossary APIs consistent with API DTO rules.",
+  "Integrate with metadata and workflow through ports or domain events."
+]
+
+must_not = [
+  "Rename BusinessTerm to BusinessGlossary at entity level.",
+  "Make glossary subordinate to data standards.",
+  "Reach into metadata persistence tables directly from glossary services."
+]
+
+validation_commands = [
+  "git diff --check",
+  "mvn -pl platform/backend/metadata-platform -am test"
+]

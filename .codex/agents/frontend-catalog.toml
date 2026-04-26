@@ -1,0 +1,34 @@
+id = "frontend-catalog"
+name = "Frontend Catalog Agent"
+type = "developer"
+branch = "feature/frontend-catalog"
+base_branch = "develop"
+worktree = "..\\codex-agent-frontend-catalog"
+
+write_scope = [
+  "platform/frontend/web-console/src/pages/catalog/**",
+  "platform/frontend/web-console/src/pages/metadata/**",
+  "platform/frontend/web-console/src/pages/glossary/**",
+  "platform/frontend/web-console/src/services/catalog/**",
+  "platform/frontend/web-console/src/services/glossary/**"
+]
+
+responsibilities = [
+  "Implement asset catalog, field dictionary, metadata detail, and glossary pages.",
+  "Consume backend DTOs without inventing incompatible frontend models.",
+  "Handle permissions, empty states, loading states, and validation errors.",
+  "Keep UI consistent with frontend shell."
+]
+
+must_not = [
+  "Modify shell routing conventions without frontend shell agent coordination.",
+  "Bypass API DTO rules with ad hoc response parsing.",
+  "Implement backend mocks as production code."
+]
+
+validation_commands = [
+  "git diff --check",
+  "cd platform/frontend/web-console; npm run lint",
+  "cd platform/frontend/web-console; npm run type-check",
+  "cd platform/frontend/web-console; npm run build"
+]
