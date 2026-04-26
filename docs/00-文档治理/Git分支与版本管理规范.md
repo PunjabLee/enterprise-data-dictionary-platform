@@ -14,6 +14,7 @@
 | `develop` | 集成分支 | 汇总已完成但尚未发布的文档和代码 | 长期 |
 | `feature/*` | 功能分支 | 开发具体产品能力或平台模块 | 短期 |
 | `docs/*` | 文档分支 | 编写、修订和评审专项文档 | 短期 |
+| `owner/*` | 产品/架构 Owner 分支 | 范围、优先级、ADR、架构约束、验收口径等 Owner 决策 | 短期 |
 | `release/*` | 发布分支 | 发布前冻结、测试、修复和打标签 | 短期 |
 | `hotfix/*` | 紧急修复分支 | 修复 `main` 上的紧急问题 | 短期 |
 | `poc/*` | 验证分支 | 技术验证、选型实验、原型验证 | 短期，可丢弃 |
@@ -26,6 +27,7 @@
 | `main` | 当前稳定基线 | 当前文档库和模板的正式基线 |
 | `develop` | 后续集成分支 | 工程骨架、详细文档和代码先合入此分支 |
 | `docs/p0-5-design-freeze` | 编码前收口文档 | 技术决策、API DTO、数据库物理模型、导入规范、安全分级、测试用例 |
+| `owner/architecture-board` | Owner 决策工作板 | 产品范围、架构约束、ADR、验收口径和跨模块收口 |
 | `poc/platform-stack` | 技术栈验证 | 验证 Spring Boot、Vue、PostgreSQL、OpenSearch、Flowable 的最小集成 |
 | `feature/platform-skeleton` | 平台工程骨架 | 创建前后端工程、部署脚本、基础 README |
 | `feature/backend-core` | 后端核心底座 | 用户、角色、权限、审计、元模型、资产核心 API |
@@ -42,6 +44,7 @@
 | --- | --- |
 | 功能开发 | `feature/<module-or-capability>` |
 | 文档修订 | `docs/<topic>` |
+| Owner 决策 | `owner/<topic>` |
 | 技术验证 | `poc/<topic>` |
 | 发布准备 | `release/v<major>.<minor>-<name>` |
 | 紧急修复 | `hotfix/<issue-or-topic>` |
@@ -59,6 +62,7 @@
 - `develop` 接受来自 `feature/*`、`docs/*`、`poc/*` 中被确认保留的变更。
 - `feature/*` 从 `develop` 拉出，完成后合回 `develop`。
 - `docs/*` 从 `develop` 拉出，评审通过后合回 `develop`。
+- `owner/*` 从 `develop` 拉出，形成产品或架构决策后通过 PR 合回 `develop`。
 - `release/*` 从 `develop` 拉出，完成测试后合入 `main` 并回合 `develop`。
 - `hotfix/*` 从 `main` 拉出，修复后合入 `main` 并回合 `develop`。
 

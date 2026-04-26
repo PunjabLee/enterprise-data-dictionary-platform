@@ -22,6 +22,8 @@
 | QA/Verification Agent | 执行测试、回归、验收用例和缺陷复核 | 否，必要时补测试 |
 | Security/Compliance Reviewer | 关注认证、权限、审计、敏感数据、密钥泄露风险 | 否 |
 
+Product/Architecture Owner 的独立工作机制见 `docs/06-实施交付/03-产品与架构Owner工作机制-v0.1.md`。
+
 首期可以简化为三类：
 
 | 简化角色 | 对应工作 |
@@ -67,6 +69,7 @@
 | 功能开发 | `feature/backend-metadata` |
 | 子任务开发 | `feature/backend-metadata/agent-asset` |
 | 文档修订 | `docs/agent-pr-governance` |
+| Owner 决策 | `owner/architecture-board` |
 | 技术验证 | `poc/opensearch-search` |
 | 缺陷修复 | `fix/import-validation` |
 | 仓库维护 | `chore/sync-main-to-develop` |
@@ -76,6 +79,7 @@
 ```powershell
 git switch develop
 git pull --ff-only
+git worktree add ..\codex-owner -b owner/architecture-board develop
 git worktree add ..\codex-backend-metadata -b feature/backend-metadata develop
 git worktree add ..\codex-frontend-shell -b feature/frontend-shell develop
 git worktree add ..\codex-pr-steward -b integration/pr-steward develop
@@ -84,6 +88,7 @@ git worktree add ..\codex-pr-steward -b integration/pr-steward develop
 约束：
 
 - 主工作区不并行给多个 Agent 使用。
+- Product/Architecture Owner 使用独立 `owner/*` 分支维护范围、ADR、架构约束和验收口径。
 - PR Steward Agent 使用只读检查为主，不直接在开发分支继续编码。
 - 需要解决冲突时，PR Steward Agent 应创建 `integration/<topic>` 分支，不在 `develop` 直接操作。
 
