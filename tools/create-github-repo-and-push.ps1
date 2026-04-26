@@ -70,9 +70,16 @@ else {
 }
 
 Write-Host "Pushing main, develop and tags..."
-git push -u $RemoteName main
-git push -u $RemoteName develop
-git push $RemoteName --tags
+if ($remoteUrl -like "https://github.com/*") {
+    git -c "http.https://github.com/.extraheader=AUTHORIZATION: bearer $env:GITHUB_TOKEN" push -u $RemoteName main
+    git -c "http.https://github.com/.extraheader=AUTHORIZATION: bearer $env:GITHUB_TOKEN" push -u $RemoteName develop
+    git -c "http.https://github.com/.extraheader=AUTHORIZATION: bearer $env:GITHUB_TOKEN" push $RemoteName --tags
+}
+else {
+    git push -u $RemoteName main
+    git push -u $RemoteName develop
+    git push $RemoteName --tags
+}
 
 Write-Host "Done."
 Write-Host "Remote: $remoteUrl"
