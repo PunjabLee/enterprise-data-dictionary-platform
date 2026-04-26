@@ -56,8 +56,9 @@ catch {
 $remoteUrl = $repo.clone_url
 Write-Host "Repository URL: $remoteUrl"
 
-$existingRemote = git remote get-url $RemoteName 2>$null
-if ($LASTEXITCODE -eq 0) {
+$remoteNames = @(git remote)
+if ($remoteNames -contains $RemoteName) {
+    $existingRemote = git remote get-url $RemoteName
     if ($existingRemote -ne $remoteUrl) {
         Write-Host "Updating remote $RemoteName from $existingRemote to $remoteUrl"
         git remote set-url $RemoteName $remoteUrl
