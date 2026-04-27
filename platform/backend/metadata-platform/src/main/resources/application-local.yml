@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: ${METADATA_DB_URL:jdbc:postgresql://localhost:5432/metadata_platform}
+    username: ${METADATA_DB_USERNAME:metadata_app}
+    password: ${METADATA_DB_PASSWORD:metadata_app_dev_password}
+  data:
+    redis:
+      host: ${METADATA_REDIS_HOST:localhost}
+      port: ${METADATA_REDIS_PORT:6379}
