@@ -1,5 +1,19 @@
 name: metadata-platform-local
 
+x-optional-middleware-placeholders:
+  opensearch:
+    status: reserved
+    policy: Add behind an explicit optional profile only after first-phase approval.
+  flowable:
+    status: reserved
+    policy: Keep lightweight workflow in the application until Flowable is approved.
+  rocketmq:
+    status: reserved
+    policy: Use the domain event abstraction before adding a broker runtime.
+  kafka:
+    status: reserved
+    policy: Use the domain event abstraction before adding a broker runtime.
+
 services:
   postgres:
     image: postgres:16-alpine
@@ -12,6 +26,8 @@ services:
       - "${POSTGRES_PORT:-5432}:5432"
     volumes:
       - postgres-data:/var/lib/postgresql/data
+    networks:
+      - metadata-platform
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
       interval: 10s
@@ -27,6 +43,8 @@ services:
       - "${REDIS_PORT:-6379}:6379"
     volumes:
       - redis-data:/data
+    networks:
+      - metadata-platform
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 10s
@@ -37,3 +55,7 @@ services:
 volumes:
   postgres-data:
   redis-data:
+
+networks:
+  metadata-platform:
+    name: metadata-platform-local

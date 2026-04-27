@@ -1,0 +1,8 @@
+asset_code,asset_name,asset_type,system_code,database_name,schema_name,parent_asset_code,data_type,classification,owner_team,description
+crm.public.customer,customer,TABLE,crm,crmdb,public,,TABLE,CONFIDENTIAL,Customer Platform,Customer master table
+crm.public.customer.customer_id,customer_id,FIELD,crm,crmdb,public,crm.public.customer,UUID,INTERNAL,Customer Platform,Primary customer identifier
+crm.public.customer.mobile_phone,mobile_phone,FIELD,crm,crmdb,public,crm.public.customer,VARCHAR(32),SENSITIVE,Customer Platform,Customer mobile phone number
+erp.finance.sales_order,sales_order,TABLE,erp,erpdb,finance,,TABLE,CONFIDENTIAL,Finance Platform,Sales order header table
+erp.finance.sales_order.order_amount,order_amount,FIELD,erp,erpdb,finance,erp.finance.sales_order,NUMERIC(18,2),CONFIDENTIAL,Finance Platform,Sales order amount
+dwh.mart.customer_revenue,customer_revenue,TABLE,dwh,dwh,mart,,TABLE,CONFIDENTIAL,Data Platform,Customer revenue mart
+bi.report.executive_revenue_dashboard,Executive Revenue Dashboard,REPORT,bi,,,,"REPORT",INTERNAL,Analytics Platform,Revenue KPI dashboard for executives

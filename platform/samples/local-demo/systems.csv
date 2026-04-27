@@ -1,0 +1,5 @@
+system_code,system_name,domain,owner_team,owner_contact,lifecycle_status,description
+crm,Customer Relationship Management,Customer,Customer Platform,crm-owner@example.local,ACTIVE,Customer account and interaction management system
+erp,Enterprise Resource Planning,Finance,Finance Platform,erp-owner@example.local,ACTIVE,Finance and order settlement system
+dwh,Enterprise Data Warehouse,Data Platform,Data Platform,dwh-owner@example.local,ACTIVE,Curated analytical warehouse for governed reporting
+bi,Management BI Portal,Analytics,Analytics Platform,bi-owner@example.local,ACTIVE,Executive and operational reporting portal
