@@ -1,43 +1,32 @@
 # Current Project Context
 
-Last updated: 2026-04-26
+Last updated: 2026-04-27
 
 ## Repository
 
 - Repository: `PunjabLee/enterprise-data-dictionary-platform`
-- Local workspace: `D:\codex`
-- Current local branch: `chore/agent-definitions`
-- Base branch for daily integration: `develop`
+- Main local workspace: `D:\codex\enterprise-data-dictionary-platform`
+- Daily integration branch: `develop`
 - Stable branch: `main`
+- Current local branch for this update: `owner/freeze-gate`
 
-## Current Local Work
+## Current Baseline
 
-- Branch `chore/agent-definitions` is local-first work and has not yet been pushed to GitHub.
-- It contains `a04f9d7 chore: add codex agent definitions`.
-- It also adds restart context files and refreshed project README files in the follow-up local commit.
-- Use `git log --oneline --decorate -5` after restart to get the exact latest local commit.
+- `chore/agent-definitions` has been merged into `develop` through PR #8.
+- `owner/architecture-board` has been merged into `develop` through PR #9.
+- Remote `develop` latest known commit: `64b8ef9998f8e8973803e351bf33cc0e93db6def`.
+- Local Git transport to GitHub is currently failing with connection reset/timeouts, so local `develop` still needs a successful `git pull --ff-only` when connectivity recovers.
 
-## Latest Known Remote Baseline
+## Completed Owner Work
 
-- `origin/main`: `4f8beca`
-- `origin/develop`: `9af6059`
+PR #9 added architecture specification and detail documents for:
 
-## Important Completed PRs
+- Business architecture.
+- Application architecture.
+- Technology architecture.
+- Data architecture.
 
-- PR #4: `hotfix/git-governance-policy -> main`, merged.
-- PR #5: `hotfix/git-governance-policy -> develop`, merged.
-- PR #6: `docs/agent-pr-governance -> develop`, merged.
-
-## Branch Contents
-
-The branch `chore/agent-definitions` adds:
-
-- `.codex/agents/*.toml` agent definitions.
-- `.codex/workflows/multi-agent-development.md`.
-- `.codex/context/*` restart context files.
-- `docs/06-实施交付/04-多Subagent创建与调度指南-v0.1.md`.
-- Documentation registry updates.
-- Root README refresh and Chinese README creation.
+It also updated the architecture README and document inventory.
 
 ## Product Positioning
 
@@ -69,21 +58,19 @@ Methodology alignment:
 - Messaging: `DomainEventPublisher` abstraction; RocketMQ/Kafka pluggable later.
 - Rules: lightweight configurable rules first; external rule engines reserved.
 - Multi-tenancy: no SaaS multi-tenant first phase, but reserve `tenant_id`.
+- Authentication: local account/JWT first, OIDC/LDAP/AD reserved.
 
 ## Git Governance
 
 - `main` only accepts `release/*` and `hotfix/*`.
 - `develop` accepts daily integration branches.
 - `docs/*`, `feature/*`, `fix/*`, `chore/*`, `owner/*`, `poc/*`, and `integration/*` must target `develop`.
-- Do not use `pull/new/<branch>` links.
 - Use explicit compare links: `compare/<base>...<branch>?expand=1`.
 - Branch policy workflow exists at `.github/workflows/branch-policy.yml`.
 
 ## Multi-Agent Model
 
 Project-level Codex custom agent definitions live in `.codex/agents`.
-
-Codex discovers these agents when launched from `D:\codex`, or with `codex -C D:\codex`. Use `/agent` in the TUI to inspect or switch active agent threads; `/subagent` is not a supported slash command.
 
 Primary agents:
 
@@ -105,16 +92,17 @@ Execution rule:
 
 - One subagent, one branch, one worktree, one write scope.
 - Do not let multiple subagents write the same files concurrently.
-- PR Steward checks branch policy before content review.
+- PR Steward checks branch policy first.
 
 ## Next Recommended Step
 
-Push `chore/agent-definitions` to GitHub and create a PR into `develop`.
+After this freeze/context update is merged, sync local `develop` and create the first implementation worktrees:
 
-Correct PR URL format:
-
-```text
-https://github.com/PunjabLee/enterprise-data-dictionary-platform/compare/develop...chore/agent-definitions?expand=1
+```powershell
+git switch develop
+git pull --ff-only
+git worktree add ..\codex-agent-foundation -b feature/platform-skeleton develop
+git worktree add ..\codex-agent-pr-steward -b integration/pr-steward develop
 ```
 
-After that PR is merged, create `feature/platform-skeleton` and start the actual engineering skeleton.
+Start with `foundation` and `pr_steward`; defer backend, frontend, DBA, deploy, and QA implementation agents until the platform skeleton PR is merged.
