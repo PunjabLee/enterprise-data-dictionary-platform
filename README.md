@@ -132,11 +132,12 @@ Recommended reading order:
 4. [Product Function Panorama And Automation Scope](docs/02-产品需求/03-产品功能全景与自动化业务说明-v0.1.md)
 5. [Technical Architecture](docs/03-架构设计/01-技术架构设计-v0.1.md)
 6. [Application Architecture](docs/03-架构设计/06-应用架构设计-v0.1.md)
-7. [Technical Decisions ADR](docs/09-会议纪要与决策/01-技术决策ADR-v0.1.md)
-8. [Enterprise Metadata Model](docs/04-数据治理与元模型/01-企业元模型设计说明书-v0.1.md)
-9. [Business Glossary Design](docs/04-数据治理与元模型/08-业务术语管理设计-v0.1.md)
-10. [Git PR Flow Policy](docs/00-文档治理/Git管理模型与PR流向控制规范-v0.1.md)
-11. [Multi-Subagent Guide](docs/06-实施交付/04-多Subagent创建与调度指南-v0.1.md)
+7. [Business And Application Architecture View](docs/03-架构设计/08-业务与应用架构视图-v0.1.md)
+8. [Technical Decisions ADR](docs/09-会议纪要与决策/01-技术决策ADR-v0.1.md)
+9. [Enterprise Metadata Model](docs/04-数据治理与元模型/01-企业元模型设计说明书-v0.1.md)
+10. [Business Glossary Design](docs/04-数据治理与元模型/08-业务术语管理设计-v0.1.md)
+11. [Git PR Flow Policy](docs/00-文档治理/Git管理模型与PR流向控制规范-v0.1.md)
+12. [Multi-Subagent Guide](docs/06-实施交付/04-多Subagent创建与调度指南-v0.1.md)
 
 Full registry:
 
