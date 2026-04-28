@@ -1,6 +1,6 @@
 # 重启检查点：第二批编排收口
 
-记录时间：2026-04-28 20:26:00 +08:00
+记录时间：2026-04-28 20:53:30 +08:00
 
 ## 快速恢复结论
 
@@ -11,7 +11,9 @@
 - 当前仅根目录 `codex` 是用户确认不用跟踪的草稿文件。
 - `backend_metadata` 和 `qa_verification` worktree 已同步到 `afda7f9`。
 - `feature/backend-metadata` 已完成并推送到 `584d3a3`。
-- 下一步优先级：修复 GitHub CLI 写接口认证并创建 backend-metadata PR。
+- PR #16 已创建：`https://github.com/PunjabLee/enterprise-data-dictionary-platform/pull/16`
+- PR #16 分支策略检查 `Validate PR target branch` 已通过。
+- 下一步优先级：使用 `qa_verification` 只读验收 PR #16。
 
 ## 本轮合并记录
 
@@ -75,6 +77,7 @@
 
 - `git push origin develop` 可用，并已成功推送 `9e2b8a0`。
 - `git push -u origin feature/backend-metadata` 已成功推送 `584d3a3`。
+- PR #16 已创建；`gh pr checks` 仍因 GraphQL 401 不可用，REST check-runs 查询可用。
 - `gh pr checks` 可用。
 - REST 读取 PR 状态可用。
 - `gh pr view` 仍有 GraphQL 401。
@@ -83,8 +86,8 @@
 
 ## 后续启动建议
 
-1. 修复或重新登录 GitHub CLI 写接口认证。
-2. 创建 `feature/backend-metadata -> develop` PR。
-3. 检查 PR 分支策略 `Validate PR target branch`。
-4. 使用 `qa_verification` 执行只读验收。
+1. 使用 `qa_verification` 执行 PR #16 只读验收。
+2. 验收通过后合并 PR #16。
+3. 合并后同步 `develop` 和后续业务 worktree。
+4. 后续修复 `gh` GraphQL 401。
 5. 继续避免多个 agent 同时写 `platform/backend/metadata-platform/src/main/resources/db/migration/**`。

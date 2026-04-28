@@ -34,10 +34,11 @@
   - PR #15 `feature/backend-system -> develop` 已合并并关闭。
   - `origin/develop` 已更新到 `afda7f95cfb2c2d252b73c323ba6e69e905c313d`。
 - 待处理：
-  - 创建 `feature/backend-metadata -> develop` PR。
-  - 当前阻塞：`gh pr create` GraphQL 401；REST 创建 PR 写接口 401；`gh auth refresh -h github.com -s repo -s workflow` 超时。
+  - 使用 `qa_verification` 对 PR #16 做只读验收。
+  - 验收通过后合并 PR #16。
   - `gh pr view` 的 GraphQL 401 问题仍需排查。
   - `gh api --method PUT .../pulls/{id}/merge` 写接口 401 问题仍需排查。
+  - `gh pr checks` 当前也受 GraphQL 401 影响；可用 REST check-runs 查询替代。
   - 直接 `git push origin develop` 当前可用。
 - 暂不清理远端功能分支，除非用户明确要求删除已合并分支。
 
