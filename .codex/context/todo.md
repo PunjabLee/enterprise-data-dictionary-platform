@@ -12,20 +12,22 @@
 
 ## P1
 
-- 继续 `frontend_catalog` PR #17：
+- `frontend_catalog` PR #17：
   - 当前路径：`D:\codex\codex-agent-frontend-catalog`
   - 当前分支：`feature/frontend-catalog`
   - 本地 HEAD：`c3462f8 功能：增加前端资产目录页面`
   - 远端 HEAD：`0de3dc6092c17d64dd86239968c1d5810390b03e`
   - PR 地址：`https://github.com/PunjabLee/enterprise-data-dictionary-platform/pull/17`
-  - 当前状态：PR 已创建，待检查和合并。
+  - 当前状态：已合入 `develop`，GitHub 状态为 closed/merged。
+  - 合并提交：`1b8521b 合并 PR #17：增加前端资产目录页面`
   - 已实现范围：资产目录列表、资产详情、字段字典、业务术语占位页、前端导航和相关 API service。
   - 已验证：`git diff --check 35a3d0be41201a8ea0b7aa746bcff954429fc46b..HEAD`、冲突标记扫描、`npm.cmd run lint`、`npm.cmd run type-check`、`npm.cmd run build`。
 - `qa_verification` worktree：
   - 当前路径：`D:\codex\codex-agent-qa-verification`
   - 当前分支：`integration/qa-verification`
   - 当前 HEAD：`35a3d0b`
-  - 用途：PR #17 合并前后的只读验收与复核。
+  - 用途：PR #17 合并后的只读验收与复核。
+  - 待办：同步到最新 `develop`。
 
 ## GitHub 同步待办
 
@@ -34,11 +36,12 @@
   - PR #14 `feature/frontend-shell -> develop` 已合并并关闭。
   - PR #15 `feature/backend-system -> develop` 已合并并关闭。
   - PR #16 `feature/backend-metadata -> develop` 已合并并关闭。
-  - `origin/develop` 已更新到 `35a3d0be41201a8ea0b7aa746bcff954429fc46b`。
-  - PR #17 `feature/frontend-catalog -> develop` 已通过 GitHub REST 创建。
+  - PR #17 `feature/frontend-catalog -> develop` 已合并并关闭。
+  - `origin/develop` 已更新到 `1b8521bf8ea0dd238d63fdc2bfabf832791d8308`。
 - 待处理：
-  - 检查 PR #17 的状态检查；如 `gh pr checks` 受 GraphQL 401 影响，改用 REST check-runs。
-  - 合并 PR #17 后同步 `develop` 并再次更新 `.codex/context`。
+  - 推送本次 PR #17 合并状态的 `.codex/context` 更新。
+  - 同步 `integration/qa-verification` 到最新 `develop`。
+  - 规划下一批业务能力或执行 PR #17 合并后验收。
   - `gh pr view` 的 GraphQL 401 问题仍需排查。
   - `gh api --method PUT .../pulls/{id}/merge` 写接口 401 问题仍需排查。
   - `gh pr checks` 当前也受 GraphQL 401 影响；可用 REST check-runs 查询替代。
