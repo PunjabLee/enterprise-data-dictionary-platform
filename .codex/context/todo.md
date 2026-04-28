@@ -8,7 +8,8 @@
   - `.codex/context/restart-checkpoint-2026-04-27-second-batch.md`
   - `.codex/context/session-handoff-2026-04-28-backend-metadata.md`
 - 根目录未跟踪文件 `codex` 不纳入版本控制。
-- 下一次重启后优先读取 `.codex/context/current-state.md`，重点关注 PR #17。
+- 下一次重启后优先读取 `.codex/context/current-state.md` 与 `.codex/context/todo.md`。
+- 恢复命令：`codex.cmd resume --last -C D:\codex\enterprise-data-dictionary-platform`
 
 ## P1
 
@@ -38,7 +39,9 @@
   - PR #17 `feature/frontend-catalog -> develop` 已合并并关闭。
   - `origin/develop` 已更新到当前上下文同步提交。
 - 待处理：
-  - 规划下一批业务能力或执行 PR #17 合并后验收。
+  - 明天优先确认下一批范围：建议选择 `backend_glossary` 业务术语基础能力 + 前端术语页对接 + `qa_verification` 复核。
+  - 正常业务批次预计 3-5 小时；建议先按约 3 小时拆小批推进。
+  - 也可以先做 PR #17 合并后验收与小修，预计 1.5-2.5 小时。
   - `gh pr view` 的 GraphQL 401 问题仍需排查。
   - `gh api --method PUT .../pulls/{id}/merge` 写接口 401 问题仍需排查。
   - `gh pr checks` 当前也受 GraphQL 401 影响；可用 REST check-runs 查询替代。

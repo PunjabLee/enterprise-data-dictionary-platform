@@ -1,6 +1,6 @@
 # 当前项目上下文
 
-最后更新：2026-04-28 21:59:37 +08:00
+最后更新：2026-04-28 22:08:41 +08:00
 
 ## 仓库状态
 
@@ -132,6 +132,13 @@
 
 ## 下一步建议
 
-- 继续规划下一批业务能力或进入 PR #17 合并后验收。
+- 下次恢复会话后，先读取 `.codex/context/current-state.md` 与 `.codex/context/todo.md`。
+- 建议下一批控制在 3 小时左右：优先做 `backend_glossary` 业务术语基础能力，前端术语页对接可并行推进，最后由 `qa_verification` 复核。
+- 若只做 PR #17 合并后验收与小修，预计 1.5-2.5 小时；若同时推进术语、血缘和多页面联动，预计 6-8 小时以上。
 - `gh pr create` / `gh pr checks` 的 GraphQL 401 仍需后续修复，但不再阻塞 #16。
 - 暂不新增 `test_automation` agent；继续使用 `qa_verification` 做验收与复核。
+
+## 下次恢复命令
+
+- 推荐命令：`codex.cmd resume --last -C D:\codex\enterprise-data-dictionary-platform`
+- 备注：当前机器 PowerShell 执行 `codex` 可能触发脚本执行策略限制，使用 `codex.cmd` 更稳。
