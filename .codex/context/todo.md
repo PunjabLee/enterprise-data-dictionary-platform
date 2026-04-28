@@ -34,8 +34,9 @@
   - PR #15 `feature/backend-system -> develop` 已合并并关闭。
   - `origin/develop` 已更新到 `afda7f95cfb2c2d252b73c323ba6e69e905c313d`。
 - 待处理：
-  - 使用 `qa_verification` 对 PR #16 做只读验收。
-  - 验收通过后合并 PR #16。
+  - 推送本地 PR #16 合并状态 context 提交；当前 GitHub HTTPS 连接失败。
+  - 同步 `integration/qa-verification` 到最新 `develop`。
+  - 启动下一批前端资产目录 `frontend_catalog`。
   - `gh pr view` 的 GraphQL 401 问题仍需排查。
   - `gh api --method PUT .../pulls/{id}/merge` 写接口 401 问题仍需排查。
   - `gh pr checks` 当前也受 GraphQL 401 影响；可用 REST check-runs 查询替代。
@@ -44,6 +45,11 @@
 
 ## P2
 
+- 可按需清理已合并分支和 worktree：
+  - `feature/deploy-local`
+  - `feature/frontend-shell`
+  - `feature/backend-system`
+  - `feature/backend-metadata`
 - 启动业务能力前，确认后端迁移脚本编号策略：
   - 当前已有：`V1__system_security_audit.sql`
   - 后续建议：按模块顺序追加 `V2__...sql`，避免多个 agent 并行写同一个迁移编号。
