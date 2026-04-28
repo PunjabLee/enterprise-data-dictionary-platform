@@ -7,6 +7,8 @@ platform/
   backend/metadata-platform/   Spring Boot 3 Maven application
   frontend/web-console/        Vue 3 TypeScript Vite console
   deploy/                      Local PostgreSQL and Redis runtime
+  scripts/                     Local runtime helper scripts
+  samples/                     Stable local demo fixtures
 ```
 
 The skeleton intentionally avoids business modules. It only establishes local runtime boundaries, dependency baselines, package layout, and startup commands.
@@ -24,11 +26,18 @@ The skeleton intentionally avoids business modules. It only establishes local ru
 Start PostgreSQL 16 and Redis:
 
 ```powershell
-cd platform/deploy
-docker compose up -d
+.\platform\scripts\local-up.ps1 -Wait
+```
+
+Equivalent direct command:
+
+```powershell
+docker compose -f platform/deploy/docker-compose.yml up -d
 ```
 
 The compose file uses local-only placeholder credentials. Override values with environment variables or a local `.env` file if needed. Do not commit real credentials.
+
+OpenSearch, Flowable, RocketMQ, and Kafka are reserved as optional future middleware and are not started by the local compose file.
 
 ## Backend
 

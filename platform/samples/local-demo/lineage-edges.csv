@@ -1,0 +1,4 @@
+source_asset_code,target_asset_code,lineage_type,transform_name,owner_team,description
+crm.public.customer,dwh.mart.customer_revenue,ETL,load_customer_revenue,Data Platform,Customer dimension fields joined into revenue mart
+erp.finance.sales_order,dwh.mart.customer_revenue,ETL,load_customer_revenue,Data Platform,Sales order amounts aggregated by customer
+dwh.mart.customer_revenue,bi.report.executive_revenue_dashboard,REPORT_FEED,publish_revenue_dashboard,Analytics Platform,Revenue mart feeds executive dashboard

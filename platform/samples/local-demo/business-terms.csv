@@ -1,0 +1,5 @@
+term_code,term_name,domain,definition,owner_team,status,related_asset_code
+customer,Customer,Customer,A person or organization that has an active or historical business relationship with the enterprise,Customer Platform,PUBLISHED,crm.public.customer
+mobile_phone,Mobile Phone,Customer,A phone number used for customer contact and verification,Customer Platform,PUBLISHED,crm.public.customer.mobile_phone
+sales_order,Sales Order,Finance,A commercial order generated after a customer confirms a purchase,Finance Platform,DRAFT,erp.finance.sales_order
+revenue,Revenue,Finance,Recognized income from sales activities after business-defined adjustments,Finance Platform,DRAFT,dwh.mart.customer_revenue

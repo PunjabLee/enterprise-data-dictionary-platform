@@ -2,7 +2,7 @@
 
 Enterprise Data Dictionary Platform is a planned enterprise-grade metadata governance, data architecture, data dictionary, business glossary, and lineage management platform.
 
-The project is currently in the documentation, architecture, governance, and engineering-skeleton preparation stage. It already contains product planning, PRD, architecture decisions, metadata model design, API/DTO specifications, Git governance, and multi-agent collaboration definitions. The application code skeleton has not been created yet.
+The project is currently in the documentation, architecture, governance, and engineering-skeleton stage. It already contains product planning, PRD, architecture decisions, metadata model design, API/DTO specifications, Git governance, multi-agent collaboration definitions, and an initial platform skeleton.
 
 [中文说明](README.zh-CN.md)
 
@@ -43,13 +43,12 @@ Current status:
 - Metadata model, physical database model, API DTOs, Excel import/export, security classification, workflow, and test cases are documented.
 - Git branch flow and PR target branch policy are enforced through documentation and GitHub Actions.
 - Multi-agent and subagent collaboration definitions are available under `.codex/agents`.
+- Initial backend, frontend, local Docker Compose, startup script, and sample fixture skeletons are available under `platform/`.
 
 Not yet started:
 
-- Backend Maven/Spring Boot project skeleton.
-- Frontend Vue/Vite/Ant Design Vue project skeleton.
-- Docker Compose runtime skeleton.
-- Flyway executable migrations.
+- Executable Flyway migrations beyond placeholder directories.
+- Production deployment manifests.
 - Production-ready application features.
 
 ## Architecture Decisions
@@ -211,17 +210,12 @@ These files capture the latest local context, pending tasks, branch status, and 
 
 ## Next Engineering Step
 
-After `chore/agent-definitions` is pushed and merged into `develop`, create:
-
-```text
-feature/platform-skeleton
-```
-
-Initial skeleton scope:
+Active first engineering skeleton scope:
 
 - Maven multi-module backend foundation.
 - Vue 3 + TypeScript + Vite + Ant Design Vue frontend foundation.
 - Docker Compose for PostgreSQL and Redis.
+- Local startup scripts and sample data fixtures.
 - Flyway migration structure.
 - Local development README and scripts.
 
