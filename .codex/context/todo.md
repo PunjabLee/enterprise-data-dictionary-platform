@@ -8,23 +8,24 @@
   - `.codex/context/restart-checkpoint-2026-04-27-second-batch.md`
   - `.codex/context/session-handoff-2026-04-28-backend-metadata.md`
 - 根目录未跟踪文件 `codex` 不纳入版本控制。
-- 下一次重启后优先读取 `.codex/context/session-handoff-2026-04-28-backend-metadata.md`。
+- 下一次重启后优先读取 `.codex/context/current-state.md`，重点关注 PR #17。
 
 ## P1
 
-- 继续 `backend_metadata`：
-  - 当前路径：`D:\codex\codex-agent-backend-metadata`
-  - 当前分支：`feature/backend-metadata`
-  - 当前 HEAD：`584d3a3`
-  - 当前状态：实现完成，工作区干净，已推送到 `origin/feature/backend-metadata`。
-  - 已实现范围：元数据模型、资产、资产属性、字段字典、版本能力。
-  - 已新增迁移脚本：`V2__metadata_assets.sql`，未修改 `V1__system_security_audit.sql`。
-  - 已验证：JDK 21 `mvn -pl platform/backend/metadata-platform -am test`、`git diff --cached --check`、冲突标记扫描。
+- 继续 `frontend_catalog` PR #17：
+  - 当前路径：`D:\codex\codex-agent-frontend-catalog`
+  - 当前分支：`feature/frontend-catalog`
+  - 本地 HEAD：`c3462f8 功能：增加前端资产目录页面`
+  - 远端 HEAD：`0de3dc6092c17d64dd86239968c1d5810390b03e`
+  - PR 地址：`https://github.com/PunjabLee/enterprise-data-dictionary-platform/pull/17`
+  - 当前状态：PR 已创建，待检查和合并。
+  - 已实现范围：资产目录列表、资产详情、字段字典、业务术语占位页、前端导航和相关 API service。
+  - 已验证：`git diff --check 35a3d0be41201a8ea0b7aa746bcff954429fc46b..HEAD`、冲突标记扫描、`npm.cmd run lint`、`npm.cmd run type-check`、`npm.cmd run build`。
 - `qa_verification` worktree：
   - 当前路径：`D:\codex\codex-agent-qa-verification`
   - 当前分支：`integration/qa-verification`
-  - 当前 HEAD：`afda7f9`
-  - 用途：`backend_metadata` 完成后的只读验收与复核。
+  - 当前 HEAD：`35a3d0b`
+  - 用途：PR #17 合并前后的只读验收与复核。
 
 ## GitHub 同步待办
 
@@ -32,15 +33,16 @@
   - PR #13 `feature/deploy-local -> develop` 已合并并关闭。
   - PR #14 `feature/frontend-shell -> develop` 已合并并关闭。
   - PR #15 `feature/backend-system -> develop` 已合并并关闭。
-  - `origin/develop` 已更新到 `afda7f95cfb2c2d252b73c323ba6e69e905c313d`。
+  - PR #16 `feature/backend-metadata -> develop` 已合并并关闭。
+  - `origin/develop` 已更新到 `35a3d0be41201a8ea0b7aa746bcff954429fc46b`。
+  - PR #17 `feature/frontend-catalog -> develop` 已通过 GitHub REST 创建。
 - 待处理：
-  - 推送本地 PR #16 合并状态 context 提交；当前 GitHub HTTPS 连接失败。
-  - 同步 `integration/qa-verification` 到最新 `develop`。
-  - 启动下一批前端资产目录 `frontend_catalog`。
+  - 检查 PR #17 的状态检查；如 `gh pr checks` 受 GraphQL 401 影响，改用 REST check-runs。
+  - 合并 PR #17 后同步 `develop` 并再次更新 `.codex/context`。
   - `gh pr view` 的 GraphQL 401 问题仍需排查。
   - `gh api --method PUT .../pulls/{id}/merge` 写接口 401 问题仍需排查。
   - `gh pr checks` 当前也受 GraphQL 401 影响；可用 REST check-runs 查询替代。
-  - 直接 `git push origin develop` 当前可用。
+  - 普通 `git push` 可能因 GitHub HTTPS 连接超时失败；必要时继续使用 GitHub REST 作为备用方案。
 - 暂不清理远端功能分支，除非用户明确要求删除已合并分支。
 
 ## P2
