@@ -2,27 +2,31 @@
 
 ## P0
 
-- 提交并推送 `.codex/context/current-state.md`、`.codex/context/todo.md`、`.codex/context/restart-checkpoint-2026-04-27-second-batch.md`。
+- 本轮 session/context 整理已本地提交，网络恢复后推送：
+  - `.codex/context/current-state.md`
+  - `.codex/context/todo.md`
+  - `.codex/context/restart-checkpoint-2026-04-27-second-batch.md`
+  - `.codex/context/session-handoff-2026-04-28-backend-metadata.md`
 - 根目录未跟踪文件 `codex` 不纳入版本控制。
-- 下一次重启后优先读取 `.codex/context/restart-checkpoint-2026-04-27-second-batch.md`。
+- 下一次重启后优先读取 `.codex/context/session-handoff-2026-04-28-backend-metadata.md`。
 
 ## P1
 
-- 同步 `backend_metadata` worktree：
+- 继续 `backend_metadata`：
   - 当前路径：`D:\codex\codex-agent-backend-metadata`
   - 当前分支：`feature/backend-metadata`
-  - 当前 HEAD：`1ed60e4`
-  - 目标基线：`origin/develop` 的 `5466ca3`
-- 启动 `backend_metadata`：
-  - 负责元数据模型、资产、资产属性、字段字典、版本能力。
-  - 迁移脚本需接续后端系统基础能力的约定。
+  - 当前 HEAD：`afda7f9`
+  - 当前状态：工作区干净，agent `Laplace` 已启动但暂未产生改动。
+  - 若 `Laplace` 仍无产出，先关闭该 agent，再由主 agent 接管。
+  - 实现范围：元数据模型、资产、资产属性、字段字典、版本能力。
+  - 迁移脚本：新增 `V2__metadata_assets.sql`，不要修改 `V1__system_security_audit.sql`。
   - 代码注释、SQL 注释和备注使用中文。
   - 作者标记使用 `Punjab`。
-- 同步 `qa_verification` worktree：
+- `qa_verification` worktree：
   - 当前路径：`D:\codex\codex-agent-qa-verification`
   - 当前分支：`integration/qa-verification`
-  - 目标基线：`origin/develop` 的 `5466ca3`
-  - 用途：下一轮 PR 的只读验收与复核。
+  - 当前 HEAD：`afda7f9`
+  - 用途：`backend_metadata` 完成后的只读验收与复核。
 
 ## GitHub 同步待办
 
@@ -30,8 +34,9 @@
   - PR #13 `feature/deploy-local -> develop` 已合并并关闭。
   - PR #14 `feature/frontend-shell -> develop` 已合并并关闭。
   - PR #15 `feature/backend-system -> develop` 已合并并关闭。
-  - `origin/develop` 已更新到 `5466ca305f265448ac929082145a36d59a664450`。
+  - `origin/develop` 已更新到 `afda7f95cfb2c2d252b73c323ba6e69e905c313d`。
 - 待处理：
+  - 推送本轮 session/context 整理提交；当前 Git HTTPS 连接 `github.com:443` 超时。
   - `gh pr view` 的 GraphQL 401 问题仍需排查。
   - `gh api --method PUT .../pulls/{id}/merge` 写接口 401 问题仍需排查。
   - 直接 `git push origin develop` 当前可用。
