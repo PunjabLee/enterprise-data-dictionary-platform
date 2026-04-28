@@ -25,9 +25,8 @@
 - `qa_verification` worktree：
   - 当前路径：`D:\codex\codex-agent-qa-verification`
   - 当前分支：`integration/qa-verification`
-  - 当前 HEAD：`35a3d0b`
+  - 当前 HEAD：当前上下文同步提交
   - 用途：PR #17 合并后的只读验收与复核。
-  - 待办：同步到最新 `develop`。
 
 ## GitHub 同步待办
 
@@ -37,10 +36,8 @@
   - PR #15 `feature/backend-system -> develop` 已合并并关闭。
   - PR #16 `feature/backend-metadata -> develop` 已合并并关闭。
   - PR #17 `feature/frontend-catalog -> develop` 已合并并关闭。
-  - `origin/develop` 已更新到 `1b8521bf8ea0dd238d63fdc2bfabf832791d8308`。
+  - `origin/develop` 已更新到当前上下文同步提交。
 - 待处理：
-  - 推送本次 PR #17 合并状态的 `.codex/context` 更新。
-  - 同步 `integration/qa-verification` 到最新 `develop`。
   - 规划下一批业务能力或执行 PR #17 合并后验收。
   - `gh pr view` 的 GraphQL 401 问题仍需排查。
   - `gh api --method PUT .../pulls/{id}/merge` 写接口 401 问题仍需排查。
