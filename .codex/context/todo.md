@@ -2,7 +2,7 @@
 
 ## P0
 
-- 本轮 session/context 整理已本地提交，网络恢复后推送：
+- 已完成并推送：
   - `.codex/context/current-state.md`
   - `.codex/context/todo.md`
   - `.codex/context/restart-checkpoint-2026-04-27-second-batch.md`
@@ -15,13 +15,11 @@
 - 继续 `backend_metadata`：
   - 当前路径：`D:\codex\codex-agent-backend-metadata`
   - 当前分支：`feature/backend-metadata`
-  - 当前 HEAD：`afda7f9`
-  - 当前状态：工作区干净，agent `Laplace` 已启动但暂未产生改动。
-  - 若 `Laplace` 仍无产出，先关闭该 agent，再由主 agent 接管。
-  - 实现范围：元数据模型、资产、资产属性、字段字典、版本能力。
-  - 迁移脚本：新增 `V2__metadata_assets.sql`，不要修改 `V1__system_security_audit.sql`。
-  - 代码注释、SQL 注释和备注使用中文。
-  - 作者标记使用 `Punjab`。
+  - 当前 HEAD：`584d3a3`
+  - 当前状态：实现完成，工作区干净，已推送到 `origin/feature/backend-metadata`。
+  - 已实现范围：元数据模型、资产、资产属性、字段字典、版本能力。
+  - 已新增迁移脚本：`V2__metadata_assets.sql`，未修改 `V1__system_security_audit.sql`。
+  - 已验证：JDK 21 `mvn -pl platform/backend/metadata-platform -am test`、`git diff --cached --check`、冲突标记扫描。
 - `qa_verification` worktree：
   - 当前路径：`D:\codex\codex-agent-qa-verification`
   - 当前分支：`integration/qa-verification`
@@ -36,7 +34,8 @@
   - PR #15 `feature/backend-system -> develop` 已合并并关闭。
   - `origin/develop` 已更新到 `afda7f95cfb2c2d252b73c323ba6e69e905c313d`。
 - 待处理：
-  - 推送本轮 session/context 整理提交；当前 Git HTTPS 连接 `github.com:443` 超时。
+  - 创建 `feature/backend-metadata -> develop` PR。
+  - 当前阻塞：`gh pr create` GraphQL 401；REST 创建 PR 写接口 401；`gh auth refresh -h github.com -s repo -s workflow` 超时。
   - `gh pr view` 的 GraphQL 401 问题仍需排查。
   - `gh api --method PUT .../pulls/{id}/merge` 写接口 401 问题仍需排查。
   - 直接 `git push origin develop` 当前可用。
