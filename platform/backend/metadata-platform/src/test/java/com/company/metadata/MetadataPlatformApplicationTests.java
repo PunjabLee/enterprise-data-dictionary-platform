@@ -6,6 +6,8 @@ import com.company.metadata.system.domain.repository.OrganizationRepository;
 import com.company.metadata.system.domain.repository.PermissionRepository;
 import com.company.metadata.system.domain.repository.RoleRepository;
 import com.company.metadata.system.domain.repository.UserRepository;
+import com.company.metadata.metadata.domain.repository.MetadataAssetRepository;
+import com.company.metadata.metadata.domain.repository.MetadataFieldRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -16,7 +18,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
                 + "org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration,"
                 + "org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration,"
                 + "org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration",
-        "metadata.system.persistence.enabled=false"
+        "metadata.system.persistence.enabled=false",
+        "metadata.metadata.persistence.enabled=false"
 })
 /**
  * 系统基础模块组件，支撑系统管理能力。
@@ -42,6 +45,12 @@ class MetadataPlatformApplicationTests {
 
     @MockBean
     private UserRepository userRepository;
+
+    @MockBean
+    private MetadataAssetRepository metadataAssetRepository;
+
+    @MockBean
+    private MetadataFieldRepository metadataFieldRepository;
 
     @Test
     void contextLoads() {
